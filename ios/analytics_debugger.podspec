@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
                        DESC
   s.homepage         = 'https://github.com/chandrabezzo/ios-analytics-debugger.git'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Solusi Bejo (https://www.solusibejo.com)' => 'chandrashibezzo@gmail.com' } }
+  s.author           = { 'Solusi Bejo (https://www.solusibejo.com)' => 'chandrashibezzo@gmail.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
