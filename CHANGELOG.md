@@ -1,3 +1,6 @@
+## 1.2.1
+* Fix nullable event payload by default as empty string
+
 ## 1.2.0
 * Handle nullable params
 
