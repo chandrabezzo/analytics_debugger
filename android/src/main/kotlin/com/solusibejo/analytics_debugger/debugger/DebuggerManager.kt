@@ -1,11 +1,9 @@
 package com.solusibejo.analytics_debugger.debugger
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.PixelFormat
-import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
@@ -26,6 +24,7 @@ import java.io.IOException
 import java.lang.ref.WeakReference
 import java.util.*
 import javax.net.ssl.HttpsURLConnection
+import androidx.core.net.toUri
 
 class DebuggerManager {
     @JvmOverloads
@@ -93,7 +92,7 @@ class DebuggerManager {
             if (!Settings.canDrawOverlays(activity)) {
                 val intent = Intent(
                     Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                    Uri.parse("package:" + activity.packageName)
+                    ("package:" + activity.packageName).toUri()
                 )
                 activity.startActivityForResult(intent, 101)
                 Toast.makeText(
@@ -139,14 +138,12 @@ class DebuggerManager {
         publishEvent(event)
     }
 
-    fun publishEvent(event: DebuggerEventItem) {
+    private fun publishEvent(event: DebuggerEventItem) {
         Handler(Looper.getMainLooper()).post {
             val debuggerViewContainer = debuggerViewContainerRef.get()
             debuggerViewContainer?.showEvent(event)
             events.add(event)
-            if (eventUpdateListener != null) {
-                eventUpdateListener!!.onNewEvent(event)
-            }
+            eventUpdateListener?.onNewEvent(event)
         }
     }
 
@@ -179,8 +176,7 @@ class DebuggerManager {
         if (resourceId > 0) {
             barHeight = resources.getDimensionPixelSize(resourceId)
         }
-        val LAYOUT_FLAG: Int
-        LAYOUT_FLAG = if (overlay) {
+        val LAYOUT_FLAG: Int = if (overlay) {
             if (Build.VERSION.SDK_INT >= 26) {
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             } else {
@@ -234,7 +230,7 @@ class DebuggerManager {
 
     private class EventsSorting : SortedList.Callback<DebuggerEventItem>() {
         override fun compare(o1: DebuggerEventItem, o2: DebuggerEventItem): Int {
-            return o2.timestamp!!.compareTo(o1.timestamp!!)
+            return o2.timestamp?.compareTo(o1.timestamp ?: 0) ?: 0
         }
 
         override fun onChanged(position: Int, count: Int) {}

@@ -24,7 +24,7 @@ class DebuggerEventsListActivity : AppCompatActivity() {
         DebuggerManager.eventUpdateListener =
             object : NewEventListener {
                 override fun onNewEvent(event: DebuggerEventItem?) {
-                    event.let { adapter?.onNewItem(it!!) }
+                    event.let { it?.let { it1 -> adapter?.onNewItem(it1) } }
                 }
             }
     }

@@ -1,7 +1,6 @@
 package com.solusibejo.analytics_debugger
 
 import android.app.Activity
-import androidx.annotation.NonNull
 import com.solusibejo.analytics_debugger.consts.MethodNames
 import com.solusibejo.analytics_debugger.debugger.DebuggerManager
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -30,12 +29,12 @@ class AnalyticsDebuggerPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   private var activity: Activity? = null
   private var debugger: DebuggerManager? = null
 
-  override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+  override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, "analytics_debugger")
     channel.setMethodCallHandler(this)
   }
 
-  override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
+  override fun onMethodCall(call: MethodCall, result: Result) {
     if(activity != null && debugger != null){
       when(call.method){
         MethodNames.show -> {
@@ -55,7 +54,7 @@ class AnalyticsDebuggerPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
     }
   }
 
-  override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+  override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
     channel.setMethodCallHandler(null)
   }
 
