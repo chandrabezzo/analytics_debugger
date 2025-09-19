@@ -44,7 +44,7 @@ object AnalyticsDebuggerMethods {
         val events: ArrayList<EventProperty> = ArrayList()
         if (values != null) {
             for ((key, value) in values){
-                events.add(EventProperty(key, value.toString()))
+                events.add(EventProperty(key, value?.toString() ?: ""))
             }
         }
 

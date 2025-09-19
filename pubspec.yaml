@@ -1,6 +1,6 @@
 name: analytics_debugger
 description: A tools to debugging your logger represented with user interface
-version: 1.2.0
+version: 1.2.1
 homepage: https://github.com/chandrabezzo/analytics_debugger
 repository: https://github.com/chandrabezzo/analytics_debugger
 issue_tracker: https://github.com/chandrabezzo/analytics_debugger/issues
