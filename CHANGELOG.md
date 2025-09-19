@@ -1,3 +1,6 @@
+## 1.1.0
+* Upgrade Flutter SDK to the latest
+
 ## 1.0.1
 * Fix Issue [#2](https://github.com/chandrabezzo/analytics_debugger/issues/2)
 

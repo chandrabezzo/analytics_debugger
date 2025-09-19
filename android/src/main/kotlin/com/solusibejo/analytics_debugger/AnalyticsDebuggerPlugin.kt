@@ -12,7 +12,15 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
-/** AnalyticsDebuggerPlugin */
+/**
+ * AnalyticsDebuggerPlugin
+ * 
+ * This plugin is built exclusively for Flutter v2 Embedding API.
+ * It implements FlutterPlugin and ActivityAware interfaces to provide
+ * proper lifecycle management and activity-aware functionality.
+ * 
+ * Note: This plugin does not support the legacy v1 Flutter Embedding.
+ */
 class AnalyticsDebuggerPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   /// The MethodChannel that will the communication between Flutter and native Android
   ///
