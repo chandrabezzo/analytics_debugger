@@ -1,3 +1,6 @@
+## 1.2.0
+* Handle nullable params
+
 ## 1.1.0
 * Upgrade Flutter SDK to the latest
 

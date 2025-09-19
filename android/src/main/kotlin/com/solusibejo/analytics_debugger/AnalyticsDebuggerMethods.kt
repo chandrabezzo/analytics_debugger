@@ -13,7 +13,7 @@ object AnalyticsDebuggerMethods {
         debugger: DebuggerManager,
         call: MethodCall,
     ){
-        val mode = call.argument<Boolean>(Arguments.debuggerMode)!!
+        val mode = call.argument<Boolean>(Arguments.debuggerMode) ?: false
         val isSystemWide = call.argument<Boolean?>(Arguments.systemWide) ?: false
         var type = DebuggerMode.bubble
 
@@ -38,12 +38,14 @@ object AnalyticsDebuggerMethods {
         debugger: DebuggerManager,
         call: MethodCall,
     ){
-        val name = call.argument<String>(Arguments.name)!!
-        val values = call.argument<Map<String, Any>?>(Arguments.values)!!
+        val name = call.argument<String>(Arguments.name)
+        val values = call.argument<Map<String, Any>?>(Arguments.values)
 
         val events: ArrayList<EventProperty> = ArrayList()
-        for ((key, value) in values){
-            events.add(EventProperty(key, value.toString()))
+        if (values != null) {
+            for ((key, value) in values){
+                events.add(EventProperty(key, value.toString()))
+            }
         }
 
         debugger.publishEvent(
